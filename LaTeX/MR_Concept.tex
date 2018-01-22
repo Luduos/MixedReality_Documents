@@ -74,7 +74,7 @@
 \begin{document}
 
 %% For the camera ready, use the commands provided by the ACM in the Permission Release Form.
-\CopyrightYear{2017}
+\CopyrightYear{2018}
 
 %\set{rightsretained}
 \conferenceinfo{Saarbrücken}{Saarland University}
@@ -91,7 +91,13 @@
 
 % Do not change the page size or page settings.
 \begin{abstract}
-  This paper describes the concept for the final project of the seminar ``Making Mixed Reality great again!''. In the beginning, the project and required terminology are introduced, as well as requirements for starting the proposed application. The following sections lead through the two game modes: 
+  This paper describes the concept for the final project of the seminar ``Making Mixed Reality great again!''. In the beginning, the project and required terminology are introduced, as well as requirements for starting the proposed Augmented Reality, locally cooperative game. 
+  
+  The following sections lead through the two game modes. The section ``Creation Mode'' describes the creative aspect of the game, by explaining how players can create and save their own adventures on basis of their real world surroundings.
+  
+  The section ``Play Mode'' describes how players can load up previously created adventures and connect with friends via Wi-Fi. Players will have to decide on a certain role they have to fit in, and navigate towards certain tasks they have to fulfil in order to complete the adventure.
+  
+  The last two sections cover the details of the two scenarios -- certain tasks -- players have to solve.
 \end{abstract}
 
 \keywords{\plainkeywords}
@@ -101,19 +107,44 @@
   full list of ACM classifiers. This section is required.}
 
 \section{Introduction}
+\subsection{Previous project}
+In a previous micro-project, a mobile application was developed using Multi-Touch Input, Mobile Display Output and a setting involving the creation of a ``Point and Click Neighbourhood adventure''. This game-prototype focused on the settings gaming aspect and included a cooperative scenario called ``Puzzle-box'' and a single player scenario called ``Dragon''. In this paper, a scenario equates to a certain task a player has to pass in order to gain a reward. Scenarios were started by scanning a so called ``Vuforia-marker''. 
 
-Using Unity3D \cite{unity3d}.
-Explain an adventure and scenarios! What is a Vuforia-marker? 
+Vuforia is an Augmented Reality Software Development Kit for mobile devices that enables the creation of Augmented Reality applications. It uses Computer Vision technology to recognize and track planar images in real-time. \cite{vuforiaExplanation}
+
+A scenario was started by pointing the mobile phones camera towards the Vuforia-marker, which would lead Vuforia to display the scenario on the screen. Scenarios were solved by accomplishing a number of win-conditions. All aspects of finding and solving every scenario will be further referred to as an ``adventure''. 
+
+\subsection{Final project}
+
+Our Final Project concept is an extension of this ``Point and Click Neighbourhood adventure'' using Multi-Touch Input and Mobile Display Output. The game is extended by improving upon both creative and playability aspects on Vuforia and Unity3D.
+
+The additional creative aspect allows the user to place the ``Puzzle-box'' and ``Dragon'' scenarios anywhere and  mark their GPS-positions. The extended playability aspect includes mandatory, cooperative gameplay to win against the Dragon. Further additions include the use of ``Mobile sensor input'' via Accelerometer to perform actions and a new inventory item.
+
+The project will be implemented using Unity3D \cite{unity3d}, which is a cross-platform 3D engine mainly used for video game development. 
+
+\subsection{Motivation}
+
+In modern day life, especially in metropolitan areas, people often don't know the names of their neighbours or have never explored their neighbourhood. It is also harder for parents to motivate their children to go outside and play, if all they really want is to stay at home and play games on their phones. On the other hand, if children want to explore the neighbourhood, parents might want to be able to guide them away from dangerous areas.
+
+This game motivates players to explore their surroundings while looking for good spots to create scenario locations during Creation Mode or while searching for scenarios during Play Mode. It demands cooperative play in order to accomplish tasks, so players will have to find people nearby to play the game with. To successfully finish an adventures, players will also have to speak with each in the real world, teaching team play and communication skills. Parents will be able to create adventures for their children, to either have some fun family time or to keep children away from dangerous locations.
+
+Previously, the game could only be played when the users knew exactly where the Vuforia-markers are located. The new features make the game playable in a more exploratory fashion, leading to a mix of physical movement while searching for scenarios along with virtual engagement on the mobile device. 
 
 \subsection{Possible Problems}
 
-Players choosing to play the adventure will need to rely on the creator to select the correct Vuforia-marker and place it at the chosen GPS-location in a way, that the Vuforia-marker will be difficult to remove but easy to access. As it is in the best interest of everyone playing the game, we will assume that creators will act with caution while creating an adventure. Experiences with the Geocaching\textsuperscript{\textregistered} Mobile App \cite{app:geocaching} support these assumptions.
+Players choosing to play the adventure will need to rely on the creator to select the correct Vuforia-marker and place it at the chosen GPS-location in a way, that the Vuforia-marker will be difficult to remove, but easy to access. As it is in the best interest of everyone playing the game, we will assume that creators act with caution while creating an adventure. Experiences with the Geocaching\textsuperscript{\textregistered} Mobile App \cite{app:geocaching} support these assumptions.
 
-\subsection{Requirements to play}
+\subsection{Player-side requirements}
 
-Which sensors and software capabilites does the phone need, what kind of OS is supported?
+The application will be usable on mobile phones running Android: OS 4.4 or higher or iOS 7.0 or higher \cite{unityRequirements}. The phone will need certain sensors and features for the application to work correctly:
 
-Gyro, GPS, Accelerometer, Camera, Android 4.4 or higher, IOS? 
+\begin{itemize}\compresslist%
+	\item Gyroscope
+	\item Accelerometer
+	\item GPS
+	\item Camera
+	\item Mobile Hotspot creation \cite{desc:hotspot}
+\end{itemize}
 
 \section{Choice between Creation Mode and Play Mode}
 
@@ -125,15 +156,6 @@ Upon starting the application, players will be presented with a menu screen in w
 
 The Creation Mode allows players to adjust an adventure to their neighbourhood and save those adjustments. This currently only includes the marking of two scenario-locations on a real world map, but offers possible extensions for later development cycles. Creation Mode is an addition to the original prototype.
 
-\begin{marginfigure}[-20pc]
-	\begin{minipage}{\marginparwidth}
-		\centering
-		\includegraphics[width=0.9\marginparwidth]{figures/CM_Entering}
-		\caption{Sample view upon entering the Creation Mode.}~\label{fig:CM_Entering}
-	\end{minipage}
-\end{marginfigure}
-
-
 \subsection{Entering Creation Mode}
 
 Upon entering Creation Mode the player will be presented with a map depicting the real world, centred on the current GPS-position of the players phone. Map textures will be downloaded from Google Maps \cite{googlemaps} using the Google Maps Developer API \cite{googlemapsAPI}.
@@ -144,7 +166,13 @@ By holding the button labelled ``Zoom'' and tilting the phone, players will be a
 
 A possible scene upon entering the Creation Mode can be seen in figure \ref{fig:CM_Entering}.
 
-
+\begin{marginfigure}[1pc]
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=0.9\marginparwidth]{figures/CM_Entering}
+		\caption{Sample view upon entering the Creation Mode.}~\label{fig:CM_Entering}
+	\end{minipage}
+\end{marginfigure}
  
 
 \subsection{Setting Scenario-markers}
@@ -222,8 +250,8 @@ The Host can now choose between starting the class selection and loading an adve
 
 After a click on the ``Class'' button, every player will be presented with the choice between one of the two following classes:
 \begin{itemize}\compresslist%
-	\item \textit{Puzzle-master:} Required to solve the Puzzle-box. Can locate the position of the Puzzle-box. Can not carry items.
-	\item \textit{Fighter:} Required to win against the Dragon. Can locate the position of the Dragon. Is able to carry items.
+	\item \textit{Puzzle-master:} Required to solve the Puzzle-box. Can locate the position of the Puzzle-box. Can carry a bell.
+	\item \textit{Fighter:} Required to win against the Dragon. Can locate the position of the Dragon. Is able to carry a feather.
 \end{itemize}
 
 Each class will have to be picked by at least one player in order to complete the adventure. The choice of class will be displayed in the top right corner of the screen, as depicted in figure \ref{fig:PM_Entering}, number 2.
@@ -289,40 +317,17 @@ Players will have to work together, as the Puzzle-box can not be solved by one p
 
 \subsection{Completing the scenario}
 
-The scenario is seen as completed, if all five sides of the Puzzle-box have turned green. Then the scenario presents the reward as an Augmented Reality object on top of the Puzzle-box: A golden feather, which is required to solve the Dragon-scenario.
+The scenario is seen as completed, if all five sides of the Puzzle-box have turned green. Then the scenario presents the reward as an Augmented Reality object on top of the Puzzle-box: A feather and a bell, which are both required to solve the Dragon-scenario.
 
-Players using the Fighter class will be able to pick up the feather and store it in their inventory, as depicted in figure \ref{fig:PM_Entering}, number 3.
+Players can pick up the item corresponding to their class and store it in their inventory, as depicted in figure \ref{fig:PM_Entering}, number 3.
 
 \subsection{Improvements over the original prototype}
 
-Improvements will include implementing better looking textures and effects, as well as an improved usability, which includes a more intuitive description of the task and a better handling of the Multi-Touch-Controls.
+Improvements will include implementing better looking textures and effects, as well as an improved usability, which includes a more intuitive description of the task and a easier handling of the Multi-Touch-Controls.
 
 \section{Dragon}
 
-test
-%\marginpar{%
-%  \vspace{-45pt} \fbox{%
-%   \begin{minipage}{0.925\marginparwidth}
-%      \textbf{Good Utilization of the Side Bar} \\
-%      \vspace{1pc} \textbf{Preparation:} Do not change the margin
-%      dimensions and do not flow the margin text to the
-%      next page. \\
-%      \vspace{1pc} \textbf{Materials:} The margin box must not intrude
-%      or overflow into the header or the footer, or the gutter space
-%      between the margin paragraph and the main left column. The text
-%      in this text box should remain the same size as the body
-%      text. Use the \texttt{{\textbackslash}vspace{}} command to set
-%      the margin
-%      note's position. \\
-%      \vspace{1pc} \textbf{Images \& Figures:} Practically anything
-%      can be put in the margin if it fits. Use the
-%      \texttt{{\textbackslash}marginparwidth} constant to set the
-%      width of the figure, table, minipage, or whatever you are trying
-%      to fit in this skinny space.
-%    \end{minipage}}\label{sec:sidebar} }
-
-
-
+The dragon needs to be defeated by completing all actions in a certain action-sequence, which include both multi touch gestures and shake gestures. Both players have to adopt specific roles based on the item they have chosen to acquire from the mystery box. The player with the feather must perform the action sequence upon the dragon and the player with the bell must ring the bell in order to distract the dragon. 
 
 
 
@@ -333,32 +338,6 @@ test
 
 \end{itemize}
 
-% \begin{figure}
-%   \includegraphics[width=.9\columnwidth]{figures/ea-figure2}
-%   \caption{If your figure has a light background, you can set its
-%     outline to light gray, like this, to make a box around
-%     it.}\label{fig:bats}
-% \end{figure}
-
-%\begin{marginfigure}[-35pc]
-%  \begin{minipage}{\marginparwidth}
-%    \centering
-%    \includegraphics[width=0.9\marginparwidth]{figures/cats}
-%    \caption{In this image, the cats are tessellated within a square
-%      frame. Images should also have captions and be within the
-%      boundaries of the sidebar on page~\pageref{sec:sidebar}. Photo:
-%      \cczero~jofish on Flickr.}~\label{fig:marginfig}
-%  \end{minipage}
-%\end{marginfigure}
-
-%\begin{figure*}
-%  \centering
-%  \includegraphics[width=1.3\columnwidth]{figures/map}
-%  \caption{In this image, the map maximizes use of space. You can make
-%    figures as wide as you need, up to a maximum of the full width of
-%    both columns. Note that \LaTeX\ tends to render large figures on a
-%    dedicated page. Image: \ccbynd~ayman on Flickr.}~\label{fig:cats}
-%\end{figure*}
 
 
 
