@@ -91,13 +91,7 @@
 
 % Do not change the page size or page settings.
 \begin{abstract}
-  UPDATED---\today. This sample paper describes the formatting
-  requirements for SIGCHI Extended Abstract Format, and this sample
-  file offers recommendations on writing for the worldwide SIGCHI
-  readership. Please review this document even if you have submitted
-  to SIGCHI conferences before, as some format details have changed
-  relative to previous years. Abstracts should be about 150
-  words. Required.
+  This paper describes the concept for the final project of the seminar ``Making Mixed Reality great again!''. In the beginning, the project and required terminology are introduced, as well as requirements for starting the proposed application. The following sections lead through the two game modes: 
 \end{abstract}
 
 \keywords{\plainkeywords}
@@ -113,7 +107,7 @@ Explain an adventure and scenarios! What is a Vuforia-marker?
 
 \subsection{Possible Problems}
 
-Players choosing to play the adventure will need to rely on the creator to select the correct Vuforia-marker and place it at the chosen GPS-location in a way that the Vuforia-marker will be difficult to remove but easy to access. As it is in the best interest of everyone playing the game, we will assume that creators will act with caution while creating an adventure. Experiences with the Geocaching\textsuperscript{\textregistered} Mobile App \cite{app:geocaching} support these assumptions.
+Players choosing to play the adventure will need to rely on the creator to select the correct Vuforia-marker and place it at the chosen GPS-location in a way, that the Vuforia-marker will be difficult to remove but easy to access. As it is in the best interest of everyone playing the game, we will assume that creators will act with caution while creating an adventure. Experiences with the Geocaching\textsuperscript{\textregistered} Mobile App \cite{app:geocaching} support these assumptions.
 
 \subsection{Requirements to play}
 
@@ -195,6 +189,13 @@ To create a new adventure, players will need to exit and re-enter Creation Mode.
 	\end{minipage}
 \end{marginfigure}
 
+
+\subsection{Possible extension}
+
+An idea to improve both on the creational and the navigational aspects of the application is to split up the Vuforia markers into multiple puzzle pieces. To solve a scenario, players would have to find all pieces belonging to the corresponding marker. Creators of adventures would have to be able to define the amount of pieces belonging to one marker and to mark each one of them accordingly on the map.
+
+This feature will be optionally implemented.
+
 \section{Play Mode}
 \label{sec:Play}
 
@@ -251,6 +252,12 @@ After pressing the ``Load'' button, the Host will be presented with a list of th
 \subsection{Finding a scenario}
 
 The navigation ability is represented as an arrow which can be seen as an Augmented Reality object on the players screen. The arrow will point towards the one scenario, which the players class can locate - f.e. if a player is a member of the Fighter class, his arrow will point towards the dragon scenario.
+
+Alternatively, other navigation abilities will be implemented, depending on the possible design decisions for the Creation Mode and on the remaining development time. 
+
+If the decision to split up Vuforia markers into multiple puzzle pieces is made, this will entail the implementation of a real world map with the different pieces represented as points of interest. In this case the navigation via Augemented Reality arrows would not be viable anymore. This navigation mode would be similar to the view in figure \ref{fig:CM_Markers}.
+
+Additionally, to cope with possible inprecisions of GPS-navigation, a ``hot-and-cold'' mode could be implemented. The application would give feedback about the rough proximity of nearby markers, instead of pointing toward the exact, but possibly positionally off location.
 
 \subsection{Scanning a scenario}
 
