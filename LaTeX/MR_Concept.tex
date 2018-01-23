@@ -24,12 +24,12 @@
 % Paper metadata (use plain text, for PDF inclusion and later
 % re-using, if desired).  Use \emtpyauthor when submitting for review
 % so you remain anonymous.
-\def\plaintitle{Concept of the final Mixed Reality WS2017/2018 project: Dragonhood} \def\plainauthor{Akash Joseph Castelino, David Liebemann}
+\def\plaintitle{Concept of the final Mixed Reality WS2017/2018 project: Point-and-Click adventure} \def\plainauthor{Akash Joseph Castelino, David Liebemann}
 \def\emptyauthor{}
 \def\plainkeywords{Concept; Mixed Reality; Augmented Reality; Interactive game; }
 \def\plaingeneralterms{Concept, Documentation}
 
-\title{Concept of the final Mixed Reality WS2017/2018 project: Dragonhood}
+\title{Concept of the final Mixed Reality WS2017/2018 project: Point-and-Click adventure}
 
 \numberofauthors{2}
 % Notice how author names are alternately typesetted to appear ordered
@@ -108,17 +108,29 @@
 
 \section{Introduction}
 \subsection{Previous project}
-In a previous micro-project, a mobile application was developed using Multi-Touch Input, Mobile Display Output and a setting involving the creation of a ``Point and Click Neighbourhood adventure''. This game-prototype focused on the settings gaming aspect and included a cooperative scenario called ``Puzzle-box'' and a single player scenario called ``Dragon''. In this paper, a scenario equates to a certain task a player has to pass in order to gain a reward. Scenarios were started by scanning a so called ``Vuforia-marker''. 
+In a previous micro-project, a mobile application was developed using Multi-Touch Input, Mobile Display Output and a setting involving the creation of a ``Point and Click Neighbourhood adventure''. This game-prototype focused on the settings gaming aspect and included a cooperative scenario called ``Puzzle-box'' and a single player scenario called ``Dragon''. In this paper, a scenario equates to a certain task a player has to pass in order to gain a reward. Scenarios were started by scanning a so called ``Vuforia-markers'' -- certain images printed on a piece of paper. 
 
 Vuforia is an Augmented Reality Software Development Kit for mobile devices that enables the creation of Augmented Reality applications. It uses Computer Vision technology to recognize and track planar images in real-time. \cite{vuforiaExplanation}
 
 A scenario was started by pointing the mobile phones camera towards the Vuforia-marker, which would lead Vuforia to display the scenario on the screen. Scenarios were solved by accomplishing a number of win-conditions. All aspects of finding and solving every scenario will be further referred to as an ``adventure''. 
 
+\begin{marginfigure}[-15pc]
+	\centering
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=1\marginparwidth]{figures/Vuforia_Questionmarks}
+		\caption{Vuforia-marker for the scenario ``Puzzle-box''.}\label{fig:Vuforia_Questionmarks}
+	\end{minipage}
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=1\marginparwidth]{figures/Vuforia_Dragon}
+		\caption{Vuforia-marker for the scenario ``Dragon''.}\label{fig:Vuforia_Dragon}
+	\end{minipage}
+\end{marginfigure}
+
 \subsection{Final project}
 
-Our Final Project concept is an extension of this ``Point and Click Neighbourhood adventure'' using Multi-Touch Input and Mobile Display Output. The game is extended by improving upon both creative and playability aspects on Vuforia and Unity3D.
-
-The additional creative aspect allows the user to place the ``Puzzle-box'' and ``Dragon'' scenarios anywhere and  mark their GPS-positions. The extended playability aspect includes mandatory, cooperative gameplay to win against the Dragon. Further additions include the use of ``Mobile sensor input'' via Accelerometer to perform actions and a new inventory item.
+Our Final Project concept is an extension of this ``Point and Click Neighbourhood adventure'' using Multi-Touch Input and Mobile Display Output. The additional creative aspect allows the user to place the ``Puzzle-box'' and ``Dragon'' scenarios anywhere and  mark their GPS-positions. The extended playability aspect includes mandatory, cooperative gameplay to win against the Dragon. Further additions include the use of ``Mobile sensor input'' via Accelerometer to perform actions, and a new inventory item.
 
 The project will be implemented using Unity3D \cite{unity3d}, which is a cross-platform 3D engine mainly used for video game development. 
 
@@ -165,14 +177,6 @@ The player position and view direction will be represented by a coloured pointer
 By holding the button labelled ``Zoom'' and tilting the phone, players will be able to zoom in and out of the map.
 
 A possible scene upon entering the Creation Mode can be seen in figure \ref{fig:CM_Entering}.
-
-\begin{marginfigure}[1pc]
-	\begin{minipage}{\marginparwidth}
-		\centering
-		\includegraphics[width=0.9\marginparwidth]{figures/CM_Entering}
-		\caption{Sample view upon entering the Creation Mode.}~\label{fig:CM_Entering}
-	\end{minipage}
-\end{marginfigure}
  
 
 \subsection{Setting Scenario-markers}
@@ -183,6 +187,14 @@ A possible scene upon entering the Creation Mode can be seen in figure \ref{fig:
 \end{figure}
 
 Markers display GPS-locations of scenarios in the real world. They will be represented by coloured points on the map. Upon entering the Creation Mode there will be no markers on the map. Players will have to determine scenario-locations by moving to a point in the real world and selecting the button ``Set Marker''.
+
+\begin{marginfigure}[8pc]
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=0.9\marginparwidth]{figures/CM_Entering}
+		\caption{Sample view upon entering the Creation Mode.}~\label{fig:CM_Entering}
+	\end{minipage}
+\end{marginfigure}
 
 After selection, players will be presented with the choice between setting two different markers:
 \begin{itemize}\compresslist%
@@ -197,8 +209,6 @@ Players will need to set both a ``Puzzle-box'' and a ``Dragon'' marker to be abl
 
 An example-view of the display after a player set both markers is depicted in figure \ref{fig:CM_Markers}.
 
-
-
 \subsection{Saving the adventure}
 
 After both markers have been set by the player, a ``Save adventure'' button will become available. Pressing this button enables the player to store the current positions of the markers and assign a name to the created adventure. After completing this process, the adventure will be available to play during Play Mode.
@@ -208,14 +218,6 @@ After both markers have been set by the player, a ``Save adventure'' button will
 Players can choose to exit Creation Mode at any time. Unsaved progress during creation will be lost upon exiting, only saved adventures will be available to play.
 
 To create a new adventure, players will need to exit and re-enter Creation Mode.
-
-\begin{marginfigure}[-20pc]
-	\begin{minipage}{\marginparwidth}
-		\centering
-		\includegraphics[width=1\marginparwidth]{figures/PM_Entering}
-		\caption{Sample view of Play Mode. We can see the background showing the video input, the available buttons if playing as Host and the connection status (1), the current Player-class (2) and whether or not the player has a feather in the inventory (3). }~\label{fig:PM_Entering}
-	\end{minipage}
-\end{marginfigure}
 
 
 \subsection{Possible extension}
@@ -236,6 +238,13 @@ Play Mode was already present in the original prototype, but will be extended to
 
 Upon entering Play Mode, the player will be presented with the current video input of the phones camera. He will additionally be presented with a range of UI-elements, as depicted in figure \ref{fig:PM_Entering}.
 
+\begin{marginfigure}[5pc]
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=1\marginparwidth]{figures/PM_Entering}
+		\caption{Sample view of Play Mode. We can see the background showing the video input, the available buttons if playing as Host and the connection status (1), the current Player-class (2) and whether or not the player has a feather in the inventory (3). }~\label{fig:PM_Entering}
+	\end{minipage}
+\end{marginfigure}
 
 \subsection{Connecting players}
 To play cooperatively, players will have to connect their applications over a Wi-fi network. All players need to have the current version of the application running on their mobile phones. One player will start a Software Hotspot \cite{desc:hotspot}, the other players then connect to that hotspot.
@@ -327,18 +336,34 @@ Improvements will include implementing better looking textures and effects, as w
 
 \section{Dragon}
 
-The dragon needs to be defeated by completing all actions in a certain action-sequence, which include both multi touch gestures and shake gestures. Both players have to adopt specific roles based on the item they have chosen to acquire from the mystery box. The player with the feather must perform the action sequence upon the dragon and the player with the bell must ring the bell in order to distract the dragon. 
+The dragon needs to be defeated by completing all actions in a certain action-sequence, which include both multi touch gestures and shake gestures. Both players will adopt specific roles based on the item they acquired from the mystery box. The player with a feather will perform the action sequence on the dragon -- examples for actions and the corresponding hints can be found in figures \ref{fig:MotionLeft} and \ref{fig:MotionRight}. Once the dragon turned towards the player who performed an action, the player with a bell has to ring it in order to distract the dragon.
 
+\begin{figure}
+	\centering
+	\begin{minipage}{.4\columnwidth}
+		
+		\includegraphics[width=1\linewidth]{figures/PM_UpDown}
+		\captionof{figure}{An action the Fighter has to perform during the fight with the dragon. Players have to swipe up and down repeatedly. }
+		\label{fig:MotionLeft}
+	\end{minipage}%
+	\begin{minipage}{.4\columnwidth}
+		
+		\includegraphics[width=1\linewidth]{figures/PM_MotionLeft}
+		\captionof{figure}{Players have to swipe to the left with three fingers.}
+		\label{fig:MotionRight}
+	\end{minipage}
+\end{figure}
 
+Gameplay key points include:
 
 \begin{itemize}\compresslist%
-\item Write in a straightforward style. Use simple sentence
-  structure. Try to avoid long sentences and complex sentence
-  structures. Use semicolons carefully.
-
+\item The multi-touch action sequence on the dragon can only be performed from behind the dragon. Players have to walk around the Vuforia-marker to achieve this.
+\item If actions are performed incorrectly or if the action sequence is attempted in front of the dragon, it will get visibly angry, indicated by an animation of the dragon-model.
+\item Ringing the bell by shaking the phone will make the dragon look at the player with the bell.
+\item The dragon will always follow one player at any time.
+\item Performing an action correctly will make the dragon look at the player who performed the action.
+\item Performing all actions correctly will make the dragon fly away from the neighbourhood.
 \end{itemize}
-
-
 
 
 \balance{} 
