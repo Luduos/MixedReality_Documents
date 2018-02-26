@@ -1,0 +1,401 @@
+\documentclass{sigchi-ext}
+% Please be sure that you have the dependencies (i.e., additional
+% LaTeX packages) to compile this example.
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[scaled=.92]{helvet} % for proper fonts
+\usepackage{graphicx} % for EPS use the graphics package instead
+\usepackage{balance}  % for useful for balancing the last columns
+\usepackage{booktabs} % for pretty table rules
+\usepackage{ccicons}  % for Creative Commons citation icons
+\usepackage{ragged2e} % for tighter hyphenation
+
+% Some optional stuff you might like/need.
+% \usepackage{marginnote} 
+% \usepackage[shortlabels]{enumitem}
+% \usepackage{paralist}
+ \usepackage[utf8]{inputenc} % for a UTF8 editor only
+
+
+%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+%\copyrightinfo{test}
+%% EXAMPLE END
+
+% Paper metadata (use plain text, for PDF inclusion and later
+% re-using, if desired).  Use \emtpyauthor when submitting for review
+% so you remain anonymous.
+\def\plaintitle{Final report for the Mixed Reality WS2017/2018 final project: Dragonhood} \def\plainauthor{Akash Joseph Castelino, David Liebemann}
+\def\emptyauthor{}
+\def\plainkeywords{Final report; Mixed Reality; Augmented Reality; Interactive video game; Puzzle game; Cooperative game;}
+\def\plaingeneralterms{Final report, Documentation}
+
+\title{Final report for the Mixed Reality WS2017/2018 final project: Dragonhood}
+
+\numberofauthors{2}
+% Notice how author names are alternately typesetted to appear ordered
+% in 2-column format; i.e., the first 4 autors on the first column and
+% the other 4 auhors on the second column. Actually, it's up to you to
+% strictly adhere to this author notation.
+\author{%
+  \alignauthor{%
+    \textbf{Akash Castelino}\\
+    \affaddr{Saarland University} \\
+    \email{s8akcast@stud.uni-saarland.de} 
+}
+\alignauthor{%
+    \textbf{David Liebemann}\\
+    \affaddr{Saarland University}\\
+    \email{s8dalieb@stud.uni-saarland.de} 
+} 
+}
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true,
+  draft
+}
+
+% \reversemarginpar%
+
+\begin{document}
+
+%% For the camera ready, use the commands provided by the ACM in the Permission Release Form.
+\CopyrightYear{2018}
+
+%\set{rightsretained}
+\conferenceinfo{Saarbrücken}{Saarland University}
+\isbn{Unknown}
+\doi{Unknown}
+%% Then override the default copyright message with the \acmcopyright command.
+\copyrightinfo{\acmcopyright}
+
+\maketitle
+
+% Uncomment to disable hyphenation (not recommended)
+% https://twitter.com/anjirokhan/status/546046683331973120
+\RaggedRight{} 
+
+% Do not change the page size or page settings.
+\begin{abstract}
+ .
+\end{abstract}
+
+\keywords{\plainkeywords}
+
+\category{H.5.m}{Information interfaces and presentation (e.g.,
+  HCI)}{Miscellaneous}\category{See}{\url{http://acm.org/about/class/1998/}}{for
+  full list of ACM classifiers. This section is required.}
+
+\section{Introduction}
+
+The final project developed for the Mixed Reality seminar is a Mobile Game with Augmented Reality aspects, set in the real world neighbourhood of players. The real aspects are enhanced with fictional scenarios players have to cooperatively solve to win the game. 
+
+
+\subsection{Previous projects}
+
+The project is built on basis of two prototypes developed over the course of the seminar, which were combined, enhanced and improved in order to build a complete experience.
+
+The "Travel Guide" mobile application enables users to connect with nearby users in order to determine the next travel goal. Users can view their current surroundings on a map and experience the position of certain Points of Interest by seeing the direction they are looking at in the real world. The map view and the display of the real world rotation were used in the final project.
+
+The "Point and Click Neighbourhood Adventure" prototype is the main precursor of the final project. It enabled users to connect to other nearby users and solve two scenarios, one of which could only be solved cooperatively. 
+
+In this paper a \textit{scenario} is defined as a sequence of tasks which players have to successfully solve in order to gain a reward. A scenario is activated by scanning a so called ``Vuforia Marker'', a certain image printed on paper. 
+
+Vuforia is an Augmented Reality Software Development Kit for mobile devices that enables the creation of Augmented Reality applications. It uses Computer Vision technology to recognize and track images in real time. \cite{vuforiaExplanation} Examples for Vuforia Markers can be seen in figure \ref{fig:Vuforia_Questionmarks} \cite{puzzleBoxMarker} and figure \ref{fig:Vuforia_Dragon} \cite{dragonMarker}.
+
+\begin{marginfigure}[0pc]
+	\centering
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=1\marginparwidth]{figures/Vuforia_Questionmarks}
+		\caption{Vuforia-marker for the scenario ``Puzzle-box''.}\label{fig:Vuforia_Questionmarks}
+	\end{minipage}
+	\begin{minipage}{\marginparwidth}
+		\centering
+		\includegraphics[width=1\marginparwidth]{figures/Vuforia_Dragon}
+		\caption{Vuforia-marker for the scenario ``Dragon''.}\label{fig:Vuforia_Dragon}
+	\end{minipage}
+\end{marginfigure}
+
+All aspects of finding and solving scenarios during a game session will further be called an \textit{adventure}. The prototype focused on the gaming aspect of such an adventure and offered only limited cooperative play. The final project enhances this prototype by providing a Creation Mode and mandatory cooperation between players in order to win the game.
+
+\subsection{Final project}
+
+The newly added Creation Mode allows players to choose the amount of markers they want to set per scenario and at what GPS-position to set them. This information can then be saved to a file.
+
+The improved Play Mode allows users to load save-files created during Creation Mode and share the scenario positions with other players over the network. Scenario positions can then be viewed on an Augmented Reality map, which is displayed when scanning the corresponding Vuforia Marker.
+
+While the Puzzle-box scenario received improved usability and touch controls, the Dragon scenario was enhanced with mandatory cooperative gameplay elements -- just as with the Puzzle-box scenario, players now have to work together to complete the Dragon scenario.
+
+\subsection{Motivation}
+
+In modern day life, especially in metropolitan areas, people often do not know the names of their neighbours or have never explored their neighbourhood. It is hard for
+parents to motivate their children to go outside and play there -- the perspective of staying at home and playing video games is more appealing. On the other hand, exploration of the neighbourhood is sometimes discouraged by parents, if dangerous areas are nearby.
+
+This game motivates players to explore their surroundings while looking for good spots to create scenario locations during Creation Mode or while searching for scenarios during Play Mode. It demands cooperative play in order to accomplish tasks, players will have to find people nearby
+to play the game with. To successfully finish adventures, players have to speak with each other in the real world, conveying team play and communication skills. 
+
+Children can be motivated to play outside and engage in physical activity due to the mix of having to search for scenarios combined with virtual gameplay on the mobile device. Parents can create adventures for their children to either have some fun family time or keep their children away from dangerous locations.
+
+\subsection{Requirements for using the application}
+
+The application will be usable on mobile phones running Android: OS 4.3 or higher or iOS 7.0 or higher \cite{unityRequirements}. The phone will need the following sensors and features for the application to work correctly:
+
+\begin{itemize}\compresslist%
+	\item Gyroscope
+	\item Accelerometer
+	\item GPS
+	\item Camera
+	\item Mobile Hotspot creation \cite{desc:hotspot}
+\end{itemize}
+
+The application has been successfully tested on a Samsung Galaxy S3 (2012) with Android: OS 4.3, a Samsung Galaxy S8 (2017) with Android: OS 7.0 and an iPhone 6 with iOS 11.2.2 installed.
+
+\section{Related work}
+
+Positive experiences with Geocaching\textsuperscript{\textregistered} Mobile App as motivation
+
+Positive experiences with Pokemon Go
+
+Todo: introduce Geo Caching and Pokemon Go. Our application is a mix of both
+
+\section{Choice between Creation Mode and Play Mode}
+
+On start-up the player is presented with a simple menu, in which he can choose between entering Creation Mode or Play Mode.
+
+\section{Creation Mode} 
+\label{sec:Creation}
+
+The Creation Mode allows players to create an adventure, adjust it to their neighbourhood and save the adjustments to file.
+
+%\begin{marginfigure}[-35pc]
+%	\begin{minipage}{\marginparwidth}
+%		\centering
+%		\includegraphics[width=0.9\marginparwidth]{figures/CM_Entering}
+%		\caption{Sample view upon entering the Creation Mode.}~\label{fig:CM_Entering}
+%	\end{minipage}
+%\end{marginfigure}
+
+\subsection{Entering Creation Mode}
+
+Upon entering Creation Mode the player is presented with a map depicting the real world surroundings, centred on the current GPS-position of the players phone. Map textures are downloaded from Google Maps \cite{googlemaps} using the Google Maps Developer API \cite{googlemapsAPI}.
+
+The player position and view direction are represented by a small player model and a blue coloured pointer. The UI shows buttons to set new markers, save the adventure, adjust the zoom level or exit the Creation Mode. The save button is disabled in the beginning, indicated by a red colouring.
+
+By holding the zoom button and tilting the phone, players are able to zoom in and out of the map.
+
+An example scene upon entering the Creation Mode can be seen in figure TODO.
+
+\subsection{Setting Scenario-markers}
+
+Markers display GPS-locations of scenarios in the real world. They are represented by small models depicting a Puzzle-box or a dragon on the map. Upon entering the Creation Mode there will be no markers on the map. Players will have to determine scenario-locations by moving to a point in the real world and selecting the button for setting new markers.
+
+TODO On first selection, display choice of how many markers are set.
+
+After selection, players will be presented with the choice between setting two different markers:
+\begin{itemize}\compresslist%
+	\item Puzzle-master: Puzzle-box
+	\item Fighter: Dragon
+\end{itemize}
+The list is written in a $Player-class: Scenario-name$ representation, displaying the current possible scenarios for each class. Player-class and scenarios are described in section ``Play Mode'' on page \pageref{sec:Play}.
+
+After selecting a scenario, a marker will appear on the current GPS-location of the player. Players will now have to select the corresponding Vuforia-marker and place it at the chosen real world position.
+
+Players will need to set both a ``Puzzle-box'' and a ``Dragon'' marker to be able to save the current adventure. It will not be possible to set two markers of the same type or save the current adventure with less than two markers on the map.
+
+An example-view of the display after a player set both markers is depicted in figure \ref{fig:CM_Markers}.
+
+\subsection{Saving the adventure}
+
+todo
+
+\subsection{Exiting Creation Mode}
+
+todo
+
+
+\section{Play Mode}
+\label{sec:PlayMode}
+
+todo - general introduction to play mode
+
+\subsection{Entering Play Mode}
+
+todo
+
+%\begin{marginfigure}[5pc]
+%	\begin{minipage}{\marginparwidth}
+%		\centering
+%		\includegraphics[width=1\marginparwidth]{figures/PM_Entering}
+%		\caption{Sample view of Play Mode. The background shows the video input. The overlain UI depicts the available buttons, if playing as Host, and the connection status (1), the current Player-class (2) and whether or not the player has a feather in the inventory (3). }~\label{fig:PM_Entering}
+%	\end{minipage}
+%\end{marginfigure}
+
+\subsection{Network connection}
+
+todo
+
+\subsection{Class selection}
+
+todo
+
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.5\columnwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{figures/Class_Fighter}
+%		\captionof{figure}{Symbol of the Fighter class}
+%		\label{fig:Class_Fighter}
+%	\end{minipage}%
+%	\begin{minipage}{.5\columnwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{figures/Class_Puzzlemaster}
+%		\captionof{figure}{Symbol of the Puzzle-master class}
+%		\label{fig:Class_Fighter}
+%	\end{minipage}
+%\end{figure}
+
+
+\subsection{Loading an adventure}
+
+todo
+
+\subsection{Navigation and locating adventures}
+
+todo
+
+\subsection{Scanning a scenario}
+
+todo
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=1\columnwidth]{figures/PM_AR_Box}
+%	\caption{Sample view of the Puzzle-box as an Augmented Reality object.}\label{fig:AR_Box1}
+%\end{figure}
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=1\columnwidth]{figures/PM_AR_Dragon}
+%	\caption{Sample view of the Dragon as an Augmented Reality object.}\label{fig:AR_Dragon1}
+%\end{figure}
+
+\section{Puzzle-box}
+
+todo
+
+\subsection{Completing the scenario}
+
+todo
+
+%\begin{marginfigure}[-20pc]
+%	\begin{minipage}{\marginparwidth}
+%		\centering
+%		\includegraphics[width=1\marginparwidth]{figures/PM_SolvedPuzzlebox}
+%		\caption{Feather presented as reward on top of the solved Puzzle-box. Notice the question marks on the sides of the box -- Fighters will see this texture instead of the actual numbers when viewing the Puzzle-box.}~\label{fig:PM_SolvedPuzzlebox}
+%	\end{minipage}
+%\end{marginfigure}
+
+\subsection{Improvements over the original prototype}
+
+todo
+
+\section{Dragon}
+
+todo
+
+%\begin{figure}
+%	\centering
+%	\begin{minipage}{.4\columnwidth}
+%		
+%		\includegraphics[width=1\linewidth]{figures/PM_UpDown}
+%		\captionof{figure}{An action the Fighter has to perform during the fight with the dragon. %Players have to swipe up and down repeatedly. }
+%		\label{fig:MotionLeft}
+%	\end{minipage}%
+%	\begin{minipage}{.4\columnwidth}
+%		
+%		\includegraphics[width=1\linewidth]{figures/PM_MotionLeft}
+%		\captionof{figure}{Players have to swipe to the left with three fingers.}
+%		\label{fig:MotionRight}
+%	\end{minipage}
+%\end{figure}
+
+\section{Implementation}
+
+The following section will discuss the implementation of the presented concepts. Naturally the project can be divided into two parts: A creation section and a play section. Each part is contained in its own Unity-Scene \cite{unityscene} and gets loaded up when the corresponding button in the selection menu is pressed.
+
+\subsection{\textbf{Creation Mode}}
+todo
+\subsubsection{Google Maps}
+todo
+\subsubsection{Setting marker locations}
+todo
+\subsection{Saving an adventure}
+
+To save an adventure, the serialization options of C\# \cite{serialization} are being used. Once the Save button is pressed, the relevant information of each marker -- ID, name and the GPS-position -- are written into a serializable data-object and stored in a C\# List \cite{listClass}. This list is then serialized by a binary formatter \cite{binaryFormatterClass} and stored as an ``.adv'' file on the local machine data storage.
+
+Such a file can then later be deserialized again into a list of data-objects containing the stored information.
+
+\subsection{\textbf{Play Mode}}
+
+The Play Mode implementation can be further subdivided into network, Puzzle-box and Dragon implementation.
+
+\subsubsection{Network}
+todo
+
+\subsubsection{Puzzle-box}
+todo
+\subsubsection{Dragon}
+todo
+
+
+\section{Conclusion and future work}
+todo
+
+\subsection{Differences to original concept}
+
+In a preceding concept document, mandatory and optional features of the final project were presented and discussed.
+
+The finished application implements every mandatory feature as planned, except for the navigation aspect during Play Mode. As discussed in the concept document, the implementation of the optional feature of splitting up Vuforia Markers into multiple pieces forced the development of a new navigation method, as discussed in the section ``Play Mode''. 
+
+This adjustments lines up well with the Augmented Reality aspect of the application and builds a highlight of the Play Mode and thus is considered as an improvement of the original concept.
+
+\subsection{Possible Problems}
+
+As the creation of adventures is community driven, real world aspects of the game -- like the correct positioning of Vuforia markers in the real world -- can not be controlled by developers. Experiences with related applications, like the Geocaching\textsuperscript{\textregistered} Mobile App \cite{app:geocaching}, support the assumption that creators will act with caution while creating an adventure, as it is in the best interest of everyone using the application.
+
+\subsection{Future work}
+
+Enable players to connect, without having to set up a WiFi-Hotspot.
+
+Power consumption because of missing performance optimization
+
+Disconnects during gameplay are not handled - if a player progresses the game state during a disconnect, the changes will not be synchronized correctly.
+
+Vuforia can recognize markers even if only a part of the image has been gathered.
+
+\balance{} 
+
+\bibliographystyle{SIGCHI-Reference-Format}
+\bibliography{MR_Final}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
